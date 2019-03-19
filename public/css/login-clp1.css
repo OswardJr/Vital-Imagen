@@ -1,0 +1,99 @@
+input.form-control::-webkit-input-placeholder {
+  color: rgba(255,255,255,.6);
+  font-size: 15.2px;
+ }
+input.form-control:-moz-placeholder {
+  color: rgba(255,255,255,.5); 
+  font-size: 15.2px;
+}
+input.form-control:-ms-input-placeholder { 
+  color: rgba(255,255,255,.5);
+  font-size: 15.2px;
+}
+
+.cabecera_login{
+   width: 90%;
+    margin: auto;
+    max-width: 400px;
+}
+
+.tittle-login{
+    text-align: center;
+    color: teal;
+}
+
+.linksform{
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+}
+
+.linksform .btn{
+    width: 60px;
+}
+
+form .form-control{
+    border-radius: 0px;
+    background: teal;
+    color: aliceblue;
+    text-align: center;
+}
+
+
+.form_login{
+    margin-top: 8px;
+}
+
+.logo{
+    width: 90%;
+    margin: auto;
+    transform: translateY(10px);
+    display: none;
+}
+
+.footer-footer{
+    padding: 12px;
+    background: linear-gradient(50deg,teal,teal);
+    color: aliceblue;
+}
+
+.creditos{
+  background: #f0ad4e;
+  padding: 12px;
+  color: rgba(0,0,0,.5);
+}
+
+.sugerencia{
+  position: fixed;
+  right:90px;
+}
+
+footer{
+  position: relative;
+}
+
+.img-newpass{
+  position: relative;
+  display: flex;
+}
+
+@media screen and (min-width: 480px) {
+    .logo{
+        display: block;
+    }
+    
+    .form-group{
+        text-align: center;
+    }
+
+    .textolvido{
+  transform: translateY(50px);
+}
+
+}
+
+@media screen and (min-width: 480px) {
+
+
+}
