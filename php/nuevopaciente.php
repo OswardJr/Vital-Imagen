@@ -35,7 +35,7 @@ if(isset($_GET['ced']) && !empty([$_GET['ced']])){
                                 <option value="E">E</option>
                                 </select>
                                 </div>
-                                 <input type="text" name="cedula" maxlength="10" id="cedula" class="form-control" placeholder="Ejem: 24924739"  value="<?php if(isset($_GET['ced']) && !empty([$_GET['ced']])){
+                                 <input type="text" name="cedula" maxlength="12" id="cedula" class="form-control" placeholder="Ejem: 24924739"  value="<?php if(isset($_GET['ced']) && !empty([$_GET['ced']])){
                                   echo $cedulaIngresada;
                                   }?>">
                                 <span class="input-group-btn">

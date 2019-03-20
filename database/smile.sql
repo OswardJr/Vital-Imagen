@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-03-2019 a las 05:45:31
+-- Tiempo de generación: 20-03-2019 a las 07:35:27
 -- Versión del servidor: 10.1.33-MariaDB
 -- Versión de PHP: 7.2.6
 
@@ -44,20 +44,12 @@ INSERT INTO `bitacora` (`id_bitacora`, `usuario_id`, `accion`, `descripcion`, `f
 (1, 1, 'Insertar', 'Agrego un Nuevo Paciente', '2019-03-19 22:31:10'),
 (2, 1, 'Insertar', 'Agrego un Nuevo Paciente', '2019-03-19 23:06:39'),
 (3, 1, 'Insertar', 'Agrego un Nuevo Paciente', '2019-03-19 23:10:46'),
-(4, 1, 'Update', 'Modifico un Paciente', '2019-03-19 23:50:56');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `categorias`
---
-
-CREATE TABLE `categorias` (
-  `id_categoria` int(11) NOT NULL,
-  `nombre_categoria` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `descripcion_categoria` text COLLATE utf8mb4_spanish_ci NOT NULL,
-  `status_categoria` enum('Activo','Inactivo') COLLATE utf8mb4_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+(4, 1, 'Update', 'Modifico un Paciente', '2019-03-19 23:50:56'),
+(5, 1, 'Insertar', 'Agrego un Nuevo Nuevo Doctor', '2019-03-20 01:48:26'),
+(6, 1, 'Insertar', 'Agrego un Nuevo Nuevo Doctor', '2019-03-20 01:49:53'),
+(7, 1, 'Insertar', 'Agrego un Nuevo Nuevo Doctor', '2019-03-20 01:52:01'),
+(8, 1, 'Insertar', 'Agrego un Nuevo Nuevo Doctor', '2019-03-20 01:52:14'),
+(9, 1, 'Insertar', 'Agrego un Nuevo Nuevo Doctor', '2019-03-20 01:53:23');
 
 -- --------------------------------------------------------
 
@@ -584,28 +576,13 @@ INSERT INTO `ciudades` (`id_ciudad`, `id_estado`, `ciudad`, `capital`) VALUES
 
 CREATE TABLE `consultas` (
   `id_consulta` int(11) NOT NULL,
-  `ced_paciente` varchar(11) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `id_doctor` int(11) DEFAULT NULL,
+  `paciente_id` int(11) NOT NULL,
+  `doctor_id` int(11) NOT NULL,
+  `servicio_id` int(11) NOT NULL,
   `consulta_por` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `tratamiento` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `diagnostico` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `indicaciones` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
   `pago_consulta` double(10,2) NOT NULL,
   `fecha_actual` date DEFAULT NULL,
-  `hora_actual` time DEFAULT NULL,
-  `status_pago` enum('pendiente','cancelado','','') COLLATE utf8mb4_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `detalle_consulta`
---
-
-CREATE TABLE `detalle_consulta` (
-  `id_consulta` int(11) NOT NULL,
-  `id_producto` int(11) NOT NULL,
-  `cantidad` int(11) NOT NULL
+  `hora_actual` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- --------------------------------------------------------
@@ -616,44 +593,23 @@ CREATE TABLE `detalle_consulta` (
 
 CREATE TABLE `doctores` (
   `id_doctor` int(11) NOT NULL,
-  `cedula` varchar(100) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `nombre` varchar(100) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `apellido` varchar(100) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `nac_doctor` varchar(2) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `ced_doctor` int(15) NOT NULL,
+  `nombres` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `apellidos` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
   `sexo` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `telefono` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `correo` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `direccion` text COLLATE utf8mb4_spanish_ci NOT NULL,
-  `cantidad_citas` int(11) NOT NULL,
-  `status` enum('Activo','Inactivo','','') COLLATE utf8mb4_spanish_ci NOT NULL,
-  `id_especialidad` int(11) NOT NULL
+  `telefono` varchar(50) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `correo` varchar(50) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `direccion` text COLLATE utf8mb4_spanish_ci,
+  `status` enum('Activo','Inactivo','','') COLLATE utf8mb4_spanish_ci NOT NULL DEFAULT 'Activo'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `doctores`
 --
 
-INSERT INTO `doctores` (`id_doctor`, `cedula`, `nombre`, `apellido`, `sexo`, `telefono`, `correo`, `direccion`, `cantidad_citas`, `status`, `id_especialidad`) VALUES
-(3, 'V-23678345', 'Leobaldo ', 'Sarmiento', 'Masculino', '02123228569', 'LeoSarmiento@gmail.com', 'Tamborito', 10, 'Activo', 2);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `especialidades`
---
-
-CREATE TABLE `especialidades` (
-  `id_especialidad` int(11) NOT NULL,
-  `nombre_especialidad` varchar(100) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `descripcion_especialidad` varchar(80) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `status` enum('activo','inactivo','','') COLLATE utf8mb4_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
---
--- Volcado de datos para la tabla `especialidades`
---
-
-INSERT INTO `especialidades` (`id_especialidad`, `nombre_especialidad`, `descripcion_especialidad`, `status`) VALUES
-(2, 'Medicina General', '', 'inactivo');
+INSERT INTO `doctores` (`id_doctor`, `nac_doctor`, `ced_doctor`, `nombres`, `apellidos`, `sexo`, `telefono`, `correo`, `direccion`, `status`) VALUES
+(1, 'V', 20989357, 'AGUSTIN JOSE', 'OCHOA', 'Masculino', '0412-4797997', 'ochoa10@gmail.com', 'LA MORA II', 'Activo');
 
 -- --------------------------------------------------------
 
@@ -2240,6 +2196,19 @@ INSERT INTO `parroquias` (`id_parroquia`, `id_municipio`, `parroquia`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `servicios`
+--
+
+CREATE TABLE `servicios` (
+  `id_servicio` int(11) NOT NULL,
+  `nombre_servicio` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `descripcion` text COLLATE utf8_spanish_ci NOT NULL,
+  `status` enum('Activo','Inactivo','','') COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `usuarios`
 --
 
@@ -2275,12 +2244,6 @@ ALTER TABLE `bitacora`
   ADD KEY `usuario_id` (`usuario_id`);
 
 --
--- Indices de la tabla `categorias`
---
-ALTER TABLE `categorias`
-  ADD PRIMARY KEY (`id_categoria`);
-
---
 -- Indices de la tabla `ciudades`
 --
 ALTER TABLE `ciudades`
@@ -2292,28 +2255,19 @@ ALTER TABLE `ciudades`
 --
 ALTER TABLE `consultas`
   ADD PRIMARY KEY (`id_consulta`),
-  ADD KEY `id_cita` (`ced_paciente`),
-  ADD KEY `id_doctor` (`id_doctor`);
-
---
--- Indices de la tabla `detalle_consulta`
---
-ALTER TABLE `detalle_consulta`
-  ADD KEY `id_consulta` (`id_consulta`),
-  ADD KEY `id_producto` (`id_producto`);
+  ADD KEY `id_cita` (`paciente_id`),
+  ADD KEY `id_doctor` (`doctor_id`),
+  ADD KEY `paciente_id` (`paciente_id`,`doctor_id`,`servicio_id`),
+  ADD KEY `paciente_id_2` (`paciente_id`,`doctor_id`,`servicio_id`),
+  ADD KEY `paciente_id_3` (`paciente_id`),
+  ADD KEY `doctor_id` (`doctor_id`),
+  ADD KEY `servicio_id` (`servicio_id`);
 
 --
 -- Indices de la tabla `doctores`
 --
 ALTER TABLE `doctores`
-  ADD PRIMARY KEY (`id_doctor`),
-  ADD KEY `id_especialidad` (`id_especialidad`);
-
---
--- Indices de la tabla `especialidades`
---
-ALTER TABLE `especialidades`
-  ADD PRIMARY KEY (`id_especialidad`);
+  ADD PRIMARY KEY (`id_doctor`);
 
 --
 -- Indices de la tabla `estados`
@@ -2346,6 +2300,12 @@ ALTER TABLE `parroquias`
   ADD KEY `id_municipio` (`id_municipio`);
 
 --
+-- Indices de la tabla `servicios`
+--
+ALTER TABLE `servicios`
+  ADD PRIMARY KEY (`id_servicio`);
+
+--
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -2360,13 +2320,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `bitacora`
 --
 ALTER TABLE `bitacora`
-  MODIFY `id_bitacora` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT de la tabla `categorias`
---
-ALTER TABLE `categorias`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_bitacora` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `ciudades`
@@ -2384,13 +2338,7 @@ ALTER TABLE `consultas`
 -- AUTO_INCREMENT de la tabla `doctores`
 --
 ALTER TABLE `doctores`
-  MODIFY `id_doctor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de la tabla `especialidades`
---
-ALTER TABLE `especialidades`
-  MODIFY `id_especialidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_doctor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `estados`
@@ -2417,6 +2365,12 @@ ALTER TABLE `parroquias`
   MODIFY `id_parroquia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1139;
 
 --
+-- AUTO_INCREMENT de la tabla `servicios`
+--
+ALTER TABLE `servicios`
+  MODIFY `id_servicio` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -2439,17 +2393,12 @@ ALTER TABLE `ciudades`
   ADD CONSTRAINT `ciudades_ibfk_1` FOREIGN KEY (`id_estado`) REFERENCES `estados` (`id_estado`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `detalle_consulta`
+-- Filtros para la tabla `consultas`
 --
-ALTER TABLE `detalle_consulta`
-  ADD CONSTRAINT `detalle_consulta_ibfk_1` FOREIGN KEY (`id_consulta`) REFERENCES `consultas` (`id_consulta`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `detalle_consulta_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id_producto`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `doctores`
---
-ALTER TABLE `doctores`
-  ADD CONSTRAINT `doctores_ibfk_1` FOREIGN KEY (`id_especialidad`) REFERENCES `especialidades` (`id_especialidad`) ON UPDATE CASCADE;
+ALTER TABLE `consultas`
+  ADD CONSTRAINT `frk_doctor` FOREIGN KEY (`doctor_id`) REFERENCES `doctores` (`id_doctor`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `frk_paciente` FOREIGN KEY (`paciente_id`) REFERENCES `pacientes` (`nro_historia`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `frk_servicio` FOREIGN KEY (`servicio_id`) REFERENCES `servicios` (`id_servicio`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `municipios`
