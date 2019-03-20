@@ -1,20 +1,18 @@
 <?php 
 require_once("../../config/conexion.php");
-$cedula=$_POST['cedula'];
+$id=$_POST['id'];
 $nombres=trim($_POST['nombres']);
 $apellidos=trim($_POST['apellidos']);
 $sexo=$_POST['sexo'];
 $status=$_POST['status'];
-$nfecha=explode('/',$_POST['fecha_nacimiento']);
-$fecha = "{$nfecha[2]}-{$nfecha[1]}-{$nfecha[0]}";
-$edad=trim($_POST['edad']);
+$fecha=$_POST['fecha_nacimiento'];
 $direccion=trim($_POST['direccion']);
-$telefono=trim($_POST['telefono']);
+$telefono_local=trim($_POST['telefono_local']);
+$telefono_movil=trim($_POST['telefono_movil']);
 $ciudad=$_POST['ciudad'];
 $parroquia=$_POST['parroquia'];
-$responsable=trim($_POST['responsable']);
 
-$sql="UPDATE pacientes SET nombres='$nombres',apellidos='$apellidos',sexo='$sexo',fecha_nacimiento='$fecha',edad='$fecha',telefono='$telefono',id_ciudad='$ciudad',id_parroquia='$parroquia',direccion='$direccion',responsable='$responsable',status='$status' WHERE ced_paciente='$cedula'";
+$sql="UPDATE pacientes SET nombres='$nombres',apellidos='$apellidos',sexo='$sexo',fecha_nacimiento='$fecha',telefono_local='$telefono_local','$telefono_movil',id_ciudad='$ciudad',id_parroquia='$parroquia',direccion='$direccion',status='$status' WHERE nro_historia='$id'";
     $result2=$con->query($sql);
 
 session_start();

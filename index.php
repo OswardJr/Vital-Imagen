@@ -11,8 +11,7 @@ if(isset($_SESSION['id_usuario'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>Clínica la paz</title>
-    <link rel="shortcut icon" type="image/x-icon" href="public/multimedia/favicon.ico" />
+    <title>Centro Profesional Cardonal Smile</title>
     <link href="public/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="public/css/font-awesome.min.css">
     <link rel="stylesheet" href="public/css/login-clp1.css">
@@ -24,12 +23,7 @@ if(isset($_SESSION['id_usuario'])){
 <body>
 
     <div class="main">
-        <div class="logo">
-            <div class="container">
-                <img src="public/multimedia/1490268935705.jpg" alt="logo de la clinica" title="logo de la empresa" width="180px" class="logologin">
-            </div>
-
-        </div>
+        
         <div id="mensaje"></div>
         <div class="content_formulario" style="">
             <div class="cabecera_login">
@@ -69,13 +63,13 @@ if(isset($_SESSION['id_usuario'])){
         <div class="footer">
             <div class="contenedor-no-flex">
                 <center>
-                    <h4><img src="public/multimedia/clinica-logo-min.png" height="30px" alt="" class="minlogofooter"> LCA La Cl&iacute;nica "LA PAZ"</h4>
+                    <h4> Centro Profesional Cardonal Smile</h4>
                 </center>
                 <center>
                     <p>Municipio Jose Felix Ribas</p>
                 </center>
                 <center>
-                    <p>La victoria, Aragua</p>
+                    <p>La Victoria, Aragua</p>
                 </center>
             </div>
             <div class="footer-footer">
@@ -84,8 +78,7 @@ if(isset($_SESSION['id_usuario'])){
                 </div>
             </div>
             <div class="creditos">
-                <center>Web makers Cristian Valera, Leoncio Requena, Adrian Yaguaracuto</center>
-                <center>Universidad Politecnica Territorial de Aragua (UPTA).</center>
+                
             </div>
         </div>
     </footer>

@@ -1,8 +1,8 @@
 <?php 
 require_once("header.php");
 $id_historial=$_GET['idhistorial'];
-$consulta=$con->query("SELECT * FROM consultas INNER JOIN pacientes ON consultas.ced_paciente=pacientes.ced_paciente INNER JOIN doctores ON consultas.id_doctor=doctores.id_doctor INNER JOIN especialidades ON doctores.id_especialidad=especialidades.id_especialidad WHERE consultas.ced_paciente='$id_historial'");
-$paciente=$con->query("SELECT * FROM pacientes INNER JOIN ciudades ON pacientes.id_ciudad=ciudades.id_ciudad INNER JOIN estados ON ciudades.id_estado=estados.id_estado INNER JOIN municipios ON estados.id_estado=municipios.id_estado INNER JOIN parroquias ON pacientes.id_parroquia=parroquias.id_parroquia WHERE pacientes.ced_paciente='$id_historial'");
+$consulta=$con->query("SELECT * FROM consultas INNER JOIN pacientes ON consultas.ced_paciente=pacientes.ced_paciente INNER JOIN doctores ON consultas.id_doctor=doctores.id_doctor INNER JOIN especialidades ON doctores.id_especialidad=especialidades.id_especialidad WHERE consultas.nro_historia='$id_historial'");
+$paciente=$con->query("SELECT * FROM pacientes INNER JOIN ciudades ON pacientes.id_ciudad=ciudades.id_ciudad INNER JOIN estados ON ciudades.id_estado=estados.id_estado INNER JOIN municipios ON estados.id_estado=municipios.id_estado INNER JOIN parroquias ON pacientes.id_parroquia=parroquias.id_parroquia WHERE pacientes.nro_historia='$id_historial'");
 $p=mysqli_fetch_assoc($paciente);
 $f=$p['fecha_nacimiento'];
 $fi=explode('-', $f);
@@ -14,8 +14,7 @@ $fecha_n=$fi[2].'-'.$fi[1].'-'.$fi[0];
     <div class="container-fluid">
            <div class="bread-content">
         <div class="container">
-          <h4>Historial</h4>
-           <span class="breadcoumb"><i class="fa fa-home"></i> Inicio <i class="fa fa-caret-right"></i>  Control <i class="fa fa-caret-right"></i> Pacientes <i class="fa fa-caret-right"></i> Historial del Paciente</span>
+           <span class="breadcoumb"><a href="pacientes.php">Pacientes</a> <i class="fa fa-caret-right"></i> Historial del Paciente</span>
         </div>
     </div>
         
@@ -42,22 +41,21 @@ $fecha_n=$fi[2].'-'.$fi[1].'-'.$fi[0];
                       <table class="table table-bordered">
                           <tr><h4 class="text-center alert alert-info">Datos del Paciente</h4></tr>
                           <tr><td>Nro Historia: <?php echo $p['nro_historia']; ?></td>
-                            <td>Cedula: <?php echo $p['ced_paciente']; ?></td>
+                            <td>Cedula: <?php echo $p['nac_paciente'].$p['ced_paciente']; ?></td>
                             <td>Nombres: <?php echo $p['nombres']; ?></td>
                              <td>Apellidos: <?php echo $p['apellidos']; ?></td>
                           </tr>   
                           <tr>
                              <td>Sexo: <?php echo $p['sexo']; ?></td>
                             <td>Fecha de Nacimiento: <?php echo $p['fecha_nacimiento']; ?></td>
-                             <td>Teléfono: <?php echo $p['telefono']; ?></td>
+                             <td>Teléfono Móvil: <?php echo $p['telefono_movil']; ?></td>
+                             <td>Teléfono Local: <?php echo $p['telefono_local']; ?></td>
                             <td>Estado: <?php echo $p['estado']; ?></td>
                           </tr> 
                           <tr>
-                           
                             <td>Ciudad: <?php echo $p['ciudad']; ?></td>
                             <td>Municipio: <?php echo $p['municipio']; ?></td>
                             <td>Dirección: <?php echo $p['direccion']; ?></td>
-                            <td>Responsable: <?php echo $p['responsable']; ?></td>
                           </tr>
                                    
                      </table>
@@ -68,37 +66,13 @@ $fecha_n=$fi[2].'-'.$fi[1].'-'.$fi[0];
                     <table class="table table-bordered" id="tabla">
                         <thead>
                             <th>Fecha & Hora</th>
-                            <th>Especialidad</th>
                             <th>Doctor</th>
                             <th>Consulta Por</th>
                             <th>Diagnostico</th>
                             <th>Ver</th>
                         </thead>
                         <tbody>
-                          <?php while($c=mysqli_fetch_array($consulta)){ 
-                               $fecha_actual=$c['fecha_actual'];
-                              $Fe=explode('-', $fecha_actual);
-                              $Fecha=$Fe[2].'-'.$Fe[1].'-'.$Fe[0];
-                              $id_consulta=$c['id_consulta'];
-                              $tabla='';
-                              $insumos=$con->query("SELECT * FROM detalle_consulta INNER JOIN productos ON detalle_consulta.id_producto=productos.id_producto WHERE id_consulta='$id_consulta'");
-                              $ini='No hay insumos en la consulta';
-                            ?>
-                          <tr>
-                            <td><?php echo $c['fecha_actual'].'/'. $c['hora_actual']; ?></td>
-                            <td><?php echo $c['nombre_especialidad']; ?></td>
-                            <td><?php echo $c['nombre']; ?></td>
-                            <td><?php echo $c['consulta_por']; ?></td>
-                            <td><?php echo $c['diagnostico']; ?></td>
-                            <td><a href="#" onclick="vercita('<?php echo $c['ced_paciente']?>','<?php echo $c['nombres']?>','<?php echo $c['nombre_especialidad']?>','<?php echo $c['nombre']?>','<?php echo str_replace('-', '/', date('d-m-Y',strtotime($fecha_actual))); ?>','<?php echo $c['consulta_por']; ?>','<?php echo $c['tratamiento']; ?>','<?php echo $c['diagnostico'] ?>','<?php echo $c['indicaciones'] ?>','<?php if($insumos->num_rows<1){
-                                    echo $ini;
-                                }else{
-                                  while($i=mysqli_fetch_array($insumos)){
-                                      echo $i['nombre_producto'].' '.'<strong>X</strong> '.$i['cantidad'].', ';
-                                  }
-                                }?>');" data-target="#verconsulta" data-toggle="modal" class="btn btn-primary" style=""><span class="fa fa-eye"></span></a></td>
-                          </tr>
-                          <?php } ?>
+                          
                         </tbody>
                     </table>
                 </div>

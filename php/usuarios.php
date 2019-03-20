@@ -14,7 +14,7 @@ require_once("header.php");
         	<div class="col-xs-12 col-xs-offset-">
                  <?php 
                     require_once("../config/conexion.php");
-                    $sql="SELECT u.*,t.tipo FROM usuarios AS u INNER JOIN tipo_usuario AS t ON u.id_tipo=t.id_tipo";
+                    $sql="SELECT * FROM usuarios WHERE status='Activo'";
                     $result=$con->query($sql);
                     $user=mysqli_num_rows($result);
                     if($user>0){
@@ -36,7 +36,6 @@ require_once("header.php");
                                 <th>Nombre</th>
                                 <th>Apellido</th>
                                 <th>Usuario</th>
-                                <th>Nivel Usuario</th>
                                 <th>Status</th>
                                 <th>Operaciones</th>
                             </thead>
@@ -52,15 +51,12 @@ require_once("header.php");
                                     <td>
                                         <?php echo $row['usuario']; ?>
                                     </td>
-                                    <td>
-                                        <?php echo $row['tipo']; ?>
-                                    </td>
-                                     <td><center><?php if($row['status']==='activo'){ ?><button style="" title="Activo" type="button" class="btn btn-success" ><i class="fa fa-chevron-up"></i></button>
+                                     <td><center><?php if($row['status']==='Activo'){ ?><button style="" title="Activo" type="button" class="btn btn-success" ><i class="fa fa-chevron-up"></i></button>
                                 <?php }else{ ?>
                                     <button type="button" title="inactivo" class="btn btn-danger" ><i class="fa fa-chevron-down"></i></button><?php } ?>
                                     </center></td>
                                     <td>
-                                        <a href="#" title="Ver datos del usuario" onclick="verusuario('<?php echo $row['nombre']; ?>','<?php echo $row['apellido']; ?>','<?php echo $row['sexo']; ?>','<?php echo $row['usuario']; ?>','<?php echo $row['tipo']; ?>','<?php echo $row['correo']; ?>','<?php echo $row['pregunta_secreta']; ?>');" data-target="#verusuario" class="btn btn-info" data-toggle="modal"><i class="fa fa-eye"></i></a>
+                                        <a href="#" title="Ver datos del usuario" onclick="verusuario('<?php echo $row['nombre']; ?>','<?php echo $row['apellido']; ?>','<?php echo $row['sexo']; ?>','<?php echo $row['usuario']; ?>','<?php echo $row['correo']; ?>','<?php echo $row['pregunta_secreta']; ?>');" data-target="#verusuario" class="btn btn-info" data-toggle="modal"><i class="fa fa-eye"></i></a>
                                         <a href="editarusuario.php?id=<?php echo $row['id_usuario']; ?>"  title="Editar usuario" class="btn btn-warning"><i class="fa fa-pencil-square-o"></i></a>
                                         <a title="Eliminar usuario" href="javascript:eliminar_usuario('<?php echo $row['id_usuario']; ?>');" class="btn btn-danger"><span class="fa fa-trash"></span></a></td>
                                 </tr>
@@ -97,7 +93,6 @@ require_once("header.php");
                             <li class="list-group-item" id="ver_apellidousuario"></li>
                             <li class="list-group-item" id="ver_sexousuario"></li>
                             <li class="list-group-item" id="ver_userusuario"></li>
-                            <li class="list-group-item" id="ver_tipousuario"></li>
                             <li class="list-group-item" id="ver_correo"></li>
                             <li class="list-group-item" id="ver_preguntausuario"></li>
                         </ul>
@@ -117,18 +112,17 @@ require_once("header.php");
 </div>
 <?php require_once("footer.php"); ?>
 <script>
-    var editarusuario = function(nombre, apellido, sexo, usuario, tipo, pregunta) {
+    var editarusuario = function(nombre, apellido, sexo, usuario, pregunta) {
         $('#edit_nombre').val(nombre);
         $('#edit_apellido').val(apellido);
         $('#edit_usuario').val(usuario);
         /*$('#edit_sexo').val(sexo);*/
     };
-    var verusuario = function(nombre, apellido, sexo, usuario, tipo,correo, pregunta) {
+    var verusuario = function(nombre, apellido, sexo, usuario,correo, pregunta) {
         $('#ver_nombreusuario').html('<b>Nombre : </b>' + nombre);
         $('#ver_apellidousuario').html('<b>Apellido : </b>' + apellido);
         $('#ver_sexousuario').html('<b>Sexo : </b>' + sexo);
         $('#ver_userusuario').html('<b>Usuario : </b>' + usuario);
-        $('#ver_tipousuario').html('<b>Nivel de usuario : </b>' + tipo);
          $('#ver_correo').html('<b>Correo : </b>' + correo);
         $('#ver_preguntausuario').html('<b>Pregunta secreta : </b>' + pregunta);
     };

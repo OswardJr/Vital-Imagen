@@ -1,26 +1,25 @@
 <?php 
 require_once("../../config/conexion.php");
-$nacionalidad=$_POST['nacionalidad'];
-$ced=trim($_POST['cedula']);
-$cedula=$nacionalidad.'-'.$ced;
-$nombres=trim($_POST['nombres']);
-$apellidos=trim($_POST['apellidos']);
+
+$nac_paciente=$_POST['nacionalidad'];
+$ced_paciente=trim($_POST['cedula']);
+$nombres=trim(strtoupper($_POST['nombres']));
+$apellidos=trim(strtoupper($_POST['apellidos']));
 $sexo=$_POST['sexo'];
-$nfecha=explode('/',$_POST['fecha_nacimiento']);
-$fecha = "{$nfecha[2]}-{$nfecha[1]}-{$nfecha[0]}";
-$edad=$_POST['edad'];
-$direccion=trim($_POST['direccion']);
-$telefono=trim($_POST['telefono']);
+$fecha=trim($_POST['fecha_nacimiento']);
+$direccion=strtoupper($_POST['direccion']);
+$telefono_local=$_POST['telefono_local'];
+$telefono_movil=$_POST['telefono_movil'];
+$estado=$_POST['estado'];
 $ciudad=$_POST['ciudad'];
 $parroquia=$_POST['parroquia'];
-$responsable=trim($_POST['responsable']);
 
-$sql="SELECT * FROM pacientes WHERE ced_paciente='$cedula'";
+$sql="SELECT * FROM pacientes WHERE nac_paciente='$nac_paciente' AND ced_paciente='$cedula'";
 $result=$con->query($sql);
 $rows=$result->num_rows;
 
 if($rows==0){
-$sql2="INSERT INTO pacientes(ced_paciente,nombres,apellidos,sexo,fecha_nacimiento,edad,telefono,id_ciudad,id_parroquia,direccion,responsable) VALUES('$cedula','$nombres','$apellidos','$sexo','$fecha','$edad','$telefono','$ciudad','$parroquia','$direccion','$responsable')";
+$sql2="INSERT INTO pacientes(nac_paciente,ced_paciente,nombres,apellidos,sexo,fecha_nacimiento,telefono_local,telefono_movil,id_estado,id_ciudad,id_parroquia,direccion) VALUES('$nac_paciente','$ced_paciente','$nombres','$apellidos','$sexo','$fecha','$telefono_local','$telefono_movil','$estado','$ciudad','$parroquia','$direccion')";
 	$result2=$con->query($sql2);
 
 session_start();
@@ -41,8 +40,6 @@ $result3=$con->query($sql3);
                 var delay = 2000;
                 setTimeout(function(){ window.location = "pacientes.php"; }, delay);</script>';
 }else{
-	echo "<script>swal('La cedula Ingresada ya se encuentra regitrada Intentelo de nuevo','','error')</script>";
+	echo "<script>swal('La cedula ingresada ya se encuentra regitrada, intentalo de nuevo','','error')</script>";
 }
-
-
 ?>

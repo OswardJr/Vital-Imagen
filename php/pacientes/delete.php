@@ -1,7 +1,7 @@
 <?php 
 require_once("../../config/conexion.php");
-$cedula=$_POST['cedula'];
-$sql="DELETE FROM pacientes  WHERE ced_paciente='$cedula'";
+$id=$_POST['id'];
+$sql="DELETE FROM pacientes  WHERE nro_historia='$id'";
 $result=$con->query($sql);
 
 session_start();

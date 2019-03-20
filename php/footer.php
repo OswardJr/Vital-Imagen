@@ -1,22 +1,19 @@
 <?php
     require_once('menu.php');
-?>
-<div class="footer text-center">
-    Sistema administrativo UMI Clínica la paz&copy; 2017 (todos los derechos reservados). 
-</div>    
+?>   
 </div>
-<script src="../public/js/jquery.js"></script>
-<script src="../public/jquery-ui/jquery-ui.min.js"></script>
-<script src="../public/js/datepicker-es.js"></script>
-<script src="../public/js/bootstrap.min.js"></script>
-<script src="../public/fullcalendar/lib/moment.min.js"></script>
-<script src="../public/fullcalendar/fullcalendar.js"></script>
-<script src="../public/fullcalendar/locale-all.js"></script>
-<script src="../public/js/sweetalert2.min.js"></script>
-<script src="../public/js/d3.v3.min.js"></script>
-<script src="../public/c3-0.4.18/c3.min.js"></script>
-<script src="../public/js/pagelca-scripts.js"></script>
-<script src="../public/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo SERVERURL; ?>public/js/jquery.js"></script>
+<script src="<?php echo SERVERURL; ?>public/jquery-ui/jquery-ui.min.js"></script>
+<script src="<?php echo SERVERURL; ?>public/js/datepicker-es.js"></script>
+<script src="<?php echo SERVERURL; ?>public/js/bootstrap.min.js"></script>
+<script src="<?php echo SERVERURL; ?>public/js/sweetalert2.min.js"></script>
+<script src="<?php echo SERVERURL; ?>public/js/d3.v3.min.js"></script>
+<script src="<?php echo SERVERURL; ?>public/c3-0.4.18/c3.min.js"></script>
+<script src="<?php echo SERVERURL; ?>public/js/pagelca-scripts.js"></script>
+<script src="<?php echo SERVERURL; ?>public/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo SERVERURL; ?>public/js/jquery.numeric.min.js"></script>
+<script src="<?php echo SERVERURL; ?>public/js/jquery.maskedinput.js"></script>
+<script src="<?php echo SERVERURL; ?>public/js/funciones.js"></script>
 <script>
     $(document).ready(function() {
         $('#tabla').addClass('table-bordered');
@@ -69,29 +66,6 @@
     });
 
 </script>
-<script type="text/javascript">
-     $(document).ready(function() {
-
-        $.get('citas/getcitas.php',function(data)
-{
-    var myevents = JSON.parse(data);
-    var calendar = $('#calendar').fullCalendar({
-        locale: 'es',
-        editable: true,
-        header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'month,basicWeek,basicDay'
-            },
-        events : myevents,
-        });
-        }
-
-    ); 
-  
-
-});
- </script>
  <script>
             $(document).ready(function(){
                
@@ -102,7 +76,6 @@
                var fecha= dia + " " + "/" + " " + mes+ " "+"/"+" "+ yyy;
                $('#fecha').html(fecha); 
              });
-        </script>
+</script>
 </body>
-
 </html>

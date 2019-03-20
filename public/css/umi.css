@@ -833,8 +833,8 @@ h1,h2,h3,h4,h5,h6{
 
 textarea,textarea.form-control{
     resize: vertical;
-    height: 34px;
-    min-height: 34px;
+    height: 70px;
+    min-height: 70px;
     max-height: 120px;
 }
 
@@ -961,4 +961,8 @@ input:checked + .slider:before {
 .box-configuration h3{
     color: #f7ac59;
 
+}
+
+.panel-heading{
+    background: #256;
 }

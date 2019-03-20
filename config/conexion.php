@@ -1,4 +1,5 @@
 <?php 
-$con=new mysqli("localhost","root","","umi_lp");
+require_once('config.php');
+$con=mysqli_connect(HOST,USER,PASS,DB);
 mysqli_set_charset($con,'utf8');
  ?>

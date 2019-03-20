@@ -11,13 +11,12 @@ $respuesta=trim($_POST['respuesta']);
 $correo=trim($_POST['correo']);
 $sha1=sha1($password);
 $confirmar=trim($_POST['confirm_password']);
-$id_tipo=$_POST['id_tipo'];
 
 $sql="SELECT * FROM usuarios WHERE usuario='$usuario'";
 $result=$con->query($sql);
 $rows=$result->num_rows;
  if($rows==0){
-	$sql2="INSERT INTO usuarios(nombre,apellido,sexo,correo,usuario,password,pregunta_secreta,respuesta_secreta,id_tipo) VALUES('$nombre','$apellido','$sexo','$correo','$usuario','$sha1','$pregunta','$respuesta','$id_tipo')";
+	$sql2="INSERT INTO usuarios(nombre,apellido,sexo,correo,usuario,password,pregunta_secreta,respuesta_secreta) VALUES('$nombre','$apellido','$sexo','$correo','$usuario','$sha1','$pregunta','$respuesta')";
 	$result2=$con->query($sql2);
 	echo '<script> swal({
                         title: "Usuario guardado con exito",
@@ -30,7 +29,7 @@ $rows=$result->num_rows;
                 var delay = 2000;
                 setTimeout(function(){ window.location = "usuarios.php"; }, delay);</script>';
 }else{
-	echo '<script>swal("El nombre de usuario ingresado ya se encuentra registrado","","error");</script>';
+	echo '<script>swal("El nombre de usuario ingresado ya se encuentra registrado. Intenta de nuevo","","error");</script>';
 }
 
  ?>

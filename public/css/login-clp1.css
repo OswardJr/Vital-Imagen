@@ -19,7 +19,8 @@ input.form-control:-ms-input-placeholder {
 
 .tittle-login{
     text-align: center;
-    color: teal;
+    color: #256;
+
 }
 
 .linksform{
@@ -35,7 +36,7 @@ input.form-control:-ms-input-placeholder {
 
 form .form-control{
     border-radius: 0px;
-    background: teal;
+    background: #256;
     color: aliceblue;
     text-align: center;
 }
@@ -54,7 +55,7 @@ form .form-control{
 
 .footer-footer{
     padding: 12px;
-    background: linear-gradient(50deg,teal,teal);
+    background: #256;
     color: aliceblue;
 }
 
