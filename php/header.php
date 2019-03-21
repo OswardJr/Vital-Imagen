@@ -27,7 +27,6 @@ $fecha=date("Y".'-'."m"."-"."d");
     <link rel="stylesheet" href="<?php echo SERVERURL; ?>public/jquery-ui/jquery-ui.css">
     <link rel="stylesheet" href="<?php echo SERVERURL; ?>public/css/umi.css">
     <link rel="stylesheet" href="<?php echo SERVERURL; ?>public/css/fuente.css">
-    <link rel="stylesheet" href="<?php echo SERVERURL; ?>public/select2/select2.min.css">
 
     <style>
         .error{

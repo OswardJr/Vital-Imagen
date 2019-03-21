@@ -157,10 +157,10 @@ $m=mysqli_fetch_assoc($ubicacionm);
 </div>
 </div>
  <?php require_once("footer.php"); ?>
-<script src="../public/js/buscar_cedula.js"></script>
-<script src="../public/js/cargar_ubicacion.js"></script>
-<script src="../public/js/datepicker-es.js"></script>
-<script src="../public/js/pacientes/editarpaciente.js"></script>
+<script src="<?php echo SERVERURL; ?>public/js/buscar_cedula.js"></script>
+<script src="<?php echo SERVERURL; ?>public/js/cargar_ubicacion.js"></script>
+<script src="<?php echo SERVERURL; ?>public/js/datepicker-es.js"></script>
+<script src="<?php echo SERVERURL; ?>public/js/pacientes/editarpaciente.js"></script>
 <script>
 $(document).ready(function(){
   $('#telefono_movil').mask('9999-9999999');

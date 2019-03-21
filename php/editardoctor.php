@@ -1,14 +1,17 @@
 <?php 
 require_once("header.php");
- ?>
+$id=$_GET['id'];
+$sql2="SELECT * FROM doctores WHERE id_doctor='$id'";
+$result2=$con->query($sql2);
+$row2=$result2->fetch_assoc();
+?>
 
 <div class="page-content">
 
     <div class="container-fluid">
            <div class="bread-content">
  <div class="container">
-            <h4>Editar doctor</h4>
-            <span class="breadcoumb"><i class="fa fa-home"></i> Inicio <i class="fa fa-caret-right"></i>  Control <i class="fa fa-caret-right"></i> Doctores <i class="fa fa-caret-right"></i> Editar doctor</span>
+            <span class="breadcoumb"> Doctores <i class="fa fa-caret-right"></i> Editar doctor</span>
         </div>
     </div>
         <div class="row">
@@ -19,31 +22,24 @@ require_once("header.php");
         			<div class="panel-heading" style="">
         				<center><h3>Modificar Doctor</h3></center>
         			</div>
-                       <?php require_once("../config/conexion.php");
-                       $id=$_GET['id'];
-                                $sql="SELECT * FROM especialidades";
-                                $result=$con->query($sql);
-                                $sql2="SELECT d.*,e.nombre_especialidad FROM doctores AS d INNER JOIN especialidades AS e ON d.id_especialidad=e.id_especialidad WHERE id_doctor='$id'";
-                                $result2=$con->query($sql2);
-                                $row2=$result2->fetch_assoc();
-                                 ?>
+                    
         			<div class="panel-body">
                 <form action="" id="form_doctor">
-                            <div class="form-group col-md-4">
-                                <label for="nombre">Cedula <span style="color: red;">*</span></label>
-                                <input type="text" name="cedula" id="cedula" class="form-control" placeholder=" ejm: V-24924739" readonly value="<?php echo $row2['cedula']; ?>">
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label for="nombre">Cedula: <span style="color: red;">*</span></label>
+                                <input type="text" name="cedula" id="cedula" placeholder="Ejemp: 123456"  maxlength="12" readonly class="form-control" value="<?php echo $row2['nac_doctor'].$row2['ced_doctor']; ?>">
                             </div>
-                            <div class="form-group col-md-4">
-                                <label for="nombre">Nombre <span style="color: red;">*</span></label>
-                                <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Leonardo" value="<?php echo $row2['nombre']; ?>">
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label for="nombre">Nombres: <span style="color: red;">*</span></label>
+                                <input type="text" name="nombre" id="nombre" class="form-control" maxlength="20" onkeypress="return validar_saltos(event)" placeholder="Ejemp: Leonardo Eduardo" value="<?php echo $row2['nombres']; ?>">
                             </div>     
-                            <div class="form-group col-md-4">
-                                <label for="apellido">Apellido <span style="color: red;">*</span></label>
-                                <input type="text" name="apellido" id="apellido" class="form-control" placeholder="Padron" value="<?php echo $row2['apellido']; ?>">
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label for="apellido">Apellidos: <span style="color: red;">*</span></label>
+                                <input type="text" name="apellido" id="apellido" class="form-control" maxlength="20" onkeypress="return validar_saltos(event)" placeholder="Ejemp:Romero Padron" value="<?php echo $row2['apellidos']; ?>">
                             </div>     
                             
-                             <div class="form-group col-md-4">
-                                <label for="password">Sexo <span style="color: red;">*</span></label>
+                             <div class="form-group col-md-6 col-sm-12">
+                                <label for="password">Sexo: <span style="color: red;">*</span></label>
                                 <select id="sexo" name="sexo" class="form-control">
                                     <option value="">Seleccione el sexo del doctor</option>
                                      <option value="Masculino"<?php if($row2['sexo']=='Masculino')echo 'selected'; ?>>Masculino</option>
@@ -51,48 +47,31 @@ require_once("header.php");
                                 </select>
                             </div> 
 
-                               <div class="form-group col-md-4">
-                                 <label for="">Telefono <span style="color: red;">*</span></label>
-                                <input type="text" class="form-control" id="telefono" name="telefono"  placeholder="ejm: 0416-2415105" value="<?php echo $row2['telefono']; ?>">
+                               <div class="form-group col-md-4 col-sm-12">
+                                 <label for="">Telefono: <span style="color: red;">*</span></label>
+                                <input type="text" class="form-control" id="telefono" name="telefono" maxlength="15"  placeholder="Ejemp: 0000-0000000" value="<?php echo $row2['telefono']; ?>">
                                 </div>
 
-                                 <div class="form-group col-md-4">
-                                 <label for="">Correo</label>
+                                 <div class="form-group col-md-4 col-sm-12">
+                                 <label for="">Correo:</label>
                                 <input type="text" class="form-control" id="correo" name="correo"  placeholder="ejm: example@gmail.com" value="<?php echo $row2['correo']; ?>">
                                 </div>
-                                 <div class="form-group col-md-6">
-                                 <label for="">Dirección</label>
-                                  <textarea name="direccion" id="direccion" cols="30" rows="10" class="form-control"><?php echo $row2['direccion']; ?></textarea>
-                                </div>
+                                
                            
-                             <div class="form-group col-md-6">
-                                <label for="nombre">Especialidad <span style="color: red;">*</span></label>
-                                <?php require_once("../config/conexion.php");
-                                $sql="SELECT * FROM especialidades WHERE status='activo'";
-                                $result=$con->query($sql);
-                                 ?>
-                               <select name="especialidad" id="especialidad" class="form-control">
-                                <option value="">Seleccione la Especialidad</option>
-                               <?php while($row=$result->fetch_assoc()){ ?>
-                                   <option value="<?php echo $row['id_especialidad']; ?>"<?php if($row['id_especialidad']===$row2['id_especialidad']) echo 'selected'; ?>><?php echo $row['nombre_especialidad']; ?></option>
-                                   <?php } ?>
-                               </select>
-                            </div>
+                            
 
-                            <div class="form-group col-md-6">
-                                 <label for="">Status <span style="color: red;">*</span></label>
+                            <div class="form-group col-md-4 col-sm-12">
+                                 <label for="">Status: <span style="color: red;">*</span></label>
                                 <select name="status" class="form-control" id="">
                                   <option value="Activo"<?php if($row2['status']==='Activo') echo 'selected'; ?>>Activo</option>
                                   <option value="Inactivo" <?php if($row2['status']==='Inactivo') echo 'selected'; ?>>Inactivo</option>
                                 </select>
-                                </div>
+                            </div>
 
-                                <div class="form-group col-md-6">
-                                 <label for="">Cantidad de Citas/Consultas</label>
-                                  <input type="number" name="cantidad" id="cantidad" class="form-control" value="<?php echo $row2['cantidad_citas']; ?>" min="1" max="10">
-                                </div>
-                            
-    
+                             <div class="form-group col-sm-12">
+                                 <label for="">Dirección:</label>
+                                  <textarea name="direccion" id="direccion" maxlength="100" cols="30" rows="2" class="form-control"><?php echo $row2['direccion']; ?></textarea>
+                              </div>
 
                            
                            <div class="text-center botones-formulario">                           
@@ -116,13 +95,9 @@ require_once("header.php");
 
 </div>
  <?php require_once("footer.php"); ?>
-  <script src="../public/js/doctores/updatedoctor.js"></script>
- <script>
-   $(document).ready(function(){
-      $('#fecha_nacimiento').datepicker({
-        changeMonth: true,
-        changeYear: true
-      });
-   });
- </script>
- <script src="../public/js/datepicker-es.js"></script>
+<script src="<?php echo SERVERURL; ?>public/js/doctores/updatedoctor.js"></script>
+<script>
+$(document).ready(function(){
+  $('#telefono').mask('9999-9999999');
+});
+</script>

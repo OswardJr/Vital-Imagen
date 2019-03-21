@@ -91,7 +91,7 @@ require_once("header.php");
 </div>
 </div>
  <?php require_once("footer.php"); ?>
-<script type="text/javascript" src="../public/js/doctores/nuevodoctor.js"></script>
+<script type="text/javascript" src="<?php echo SERVERURL; ?>public/js/doctores/nuevodoctor.js"></script>
 <script type="text/javascript">
      $(document).ready(function(){
  

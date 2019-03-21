@@ -19,7 +19,7 @@
                     </li>
             
             <li class="submenu-content">
-                <a href="Consultas.php"> <span>Servicios</span></a>
+                <a href="servicios.php"> <span>Servicios</span></a>
             </li>
 
               <li class="submenu-content">

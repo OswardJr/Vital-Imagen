@@ -15,7 +15,7 @@ require_once("header.php");
         		
                 <?php 
                     require_once("../config/conexion.php");
-                    $sql="SELECT * FROM pacientes ORDER BY nro_historia ASC limit 10";
+                    $sql="SELECT * FROM pacientes ORDER BY nombres ASC";
                     $result=$con->query($sql);
                     $pacientes=mysqli_num_rows($result);
                     if($pacientes>0){

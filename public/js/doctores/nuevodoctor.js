@@ -2,19 +2,14 @@ $(document).ready(function(){
 	$('#guardar').click(function(e){
 		e.preventDefault();
 		
-		var cedula,nombre,apellido,sexo,telefono,correo,direccion,especialidad,expcedula,expnombre,expapellido,exptelefono,expcorreo,expdireccion;
 
-		cedula=document.getElementById("cedula").value;
-		expcedula=/\d[0-9]/;
-		nombre=document.getElementById("nombre").value;
-		expnombre=/[a-zA-Za]/;
-		apellido=document.getElementById("apellido").value;
-		expapellido=/[a-zA-Z]/;
-		sexo=document.getElementById("sexo").value;
-		telefono=document.getElementById("telefono").value;
-		correo=document.getElementById("correo").value;
-		expcorreo=/\w+@\w+\.+[a-z]/;
-		direccion=document.getElementById("direccion").value;
+		var cedula=document.getElementById("cedula").value;
+		var nombre=document.getElementById("nombre").value;
+		var apellido=document.getElementById("apellido").value;
+		var sexo=document.getElementById("sexo").value;
+		var telefono=document.getElementById("telefono").value;
+		var correo=document.getElementById("correo").value;
+		var direccion=document.getElementById("direccion").value;
 
 		if(cedula===""){
 			swal("Ingresa cedula del doctor","","error");

@@ -9,8 +9,9 @@ $telefono=trim($_POST['telefono']);
 $correo=trim($_POST['correo']);
 $direccion=trim(strtoupper($_POST['direccion']));
 
-
-
+$search=mysqli_query($con,"SELECT * FROM doctores WHERE nac_doctor='$nacionalidad' AND ced_doctor='$cedula'");
+$s=mysqli_num_rows($search);
+if($s == 0){
  	$sql2="INSERT INTO doctores(nac_doctor,ced_doctor,nombres,apellidos,sexo,telefono,correo,direccion) VALUES ('$nacionalidad','$cedula','$nombre','$apellido','$sexo','$telefono','$correo','$direccion')";
  	$result2=$con->query($sql2);
 
@@ -32,5 +33,10 @@ if($sql2){
                 var delay = 2000;
                 setTimeout(function(){ window.location = "doctores.php"; }, delay);</script>';
   }
+ }else{
+ 	echo '<script>
+		swal("La cedula ingresada ya se encuentra registrada, intenta nuevamente","","success");
+ 	</script>';
+ }
  
  ?>

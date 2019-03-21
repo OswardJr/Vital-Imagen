@@ -58,7 +58,7 @@ if(isset($_GET['ced']) && !empty([$_GET['ced']])){
 
                         <div class="form-group col-md-6 col-sm-12">
                            <label for="">Sexo: <span style="color: red;">*</span></label>
-                           <select name="sexo" id="sexo" class="form-control" required>
+                           <select name="sexo" id="sexo" class="form-control select2" required>
                              <option value="">Seleccione el sexo:</option>
                              <option value="Masculino">Masculino</option>
                              <option value="Femenino">Femenino</option>
@@ -160,3 +160,4 @@ $(document).ready(function(){
   $('#cedula').numeric();
 });
 </script>
+

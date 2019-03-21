@@ -16,7 +16,7 @@ require_once("header.php");
           
                     <?php 
                     require_once("../config/conexion.php");
-                    $sql="SELECT * FROM doctores";
+                    $sql="SELECT * FROM doctores ORDER BY nombres ASC";
                     $result=$con->query($sql);
                     $d=mysqli_num_rows($result);
                     if($d>0){
